@@ -96,10 +96,12 @@ bool AStart::testRoad(int pos, int cur)
 		}
 		if (map[pos] != 1) //1代表障碍物，0则可通行
 		{
-			if (close_list.end() == find(close_list.begin(), close_list.end(), pos))
+			//find函数在close_list列表中寻找pos，找到了返回与pos等价的元素，没找到返回close_list.end()！
+			if (close_list.end() == find(close_list.begin(), close_list.end(), pos))  //如果没找到，即不在close_list列表中
 			{
+
 				std::list<int>::iterator iter = find(open_list.begin(), open_list.end(), pos);
-				if (iter == open_list.end())
+				if (iter == open_list.end())      //如果不在open_list列表中？
 				{
 					open_list.push_back(pos);
 					rect[pos].pre = &rect[cur];
